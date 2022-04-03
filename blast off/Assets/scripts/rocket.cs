@@ -8,8 +8,7 @@ public class rocket : MonoBehaviour
 
     Rigidbody rocketRB;
     AudioSource rocketAudioSource;
-
-    //SeialixeFields
+    //SerialixeFields
     [SerializeField] AudioClip mainEngine;
     [SerializeField] float thrustSpeed = 5.0f;
     [SerializeField] float rotationSpeed = 2.5f;
@@ -55,14 +54,27 @@ public class rocket : MonoBehaviour
                 break;
             case "Finish":
                 print("You win!");
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene("lvl2");
                 break;
                 default:
                 print("You lose!");
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene("lvl1");
                 break;
         }
     }
+
+
+    void LoadNextScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex);
+    }
+
 
     void Rotate()
     {
